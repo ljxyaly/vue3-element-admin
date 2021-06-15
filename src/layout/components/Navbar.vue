@@ -1,6 +1,6 @@
 <template>
-  <div>
-    navbar
+  <div class="h-12 flex items-center justify-center shadow">
+    Navbar
   </div>
 </template>
 
