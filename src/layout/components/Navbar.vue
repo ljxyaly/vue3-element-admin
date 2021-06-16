@@ -1,5 +1,5 @@
 <template>
-  <div class="h-12 flex items-center justify-center shadow">
+  <div class="h-16 flex items-center justify-center border-b border-gray-100 bg-white">
     Navbar
   </div>
 </template>
