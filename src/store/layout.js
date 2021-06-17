@@ -3,9 +3,12 @@ import { defineStore } from 'pinia'
 export const useLayoutStore = defineStore({
   id: 'layout',
   state: () => ({
-    sidebar: {
-      // 折叠状态
-      collapse: false
+    layout: 'default',
+    aside: {
+      menu: [],
+    },
+    route: {
+      currentPath: ''
     }
   }),
   getters: {
@@ -14,8 +17,11 @@ export const useLayoutStore = defineStore({
     },
   },
   actions: {
-    switchSidebarCollapse() {
-      this.sidebar.collapse = !this.sidebar.collapse
+    updateAsideMenu(data) {
+      this.aside.menu = data
+    },
+    updateRouteCurrentPath(path) {
+      this.route.currentPath = path
     }
   }
 })

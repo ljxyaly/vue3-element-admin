@@ -1,6 +1,6 @@
 <template>
-  <div class="sidebar_left h-full w-18">
-    <div class="logo_wrap h-16 flex flex-col items-center justify-center">
+  <div class="sidebar h-full w-18">
+    <div class="logo_wrap h-18 flex flex-col items-center justify-center">
       <img src="/logo.png" class="w-8" />
     </div>
     <el-scrollbar>
@@ -59,16 +59,11 @@ function toPage(item) {
 </script>
 
 <style lang="postcss" scoped>
-.sidebar_left {
-  /* background: linear-gradient(90deg, #ecf0f8, #000); */
+.sidebar {
   background: #111316;
   color: #fff;
   .item.active {
     background: #1890ff;
   }
-}
-.sidebar_right {
-  background: #fff;
-  /* color: #fff; */
 }
 </style>

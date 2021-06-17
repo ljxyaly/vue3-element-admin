@@ -1,120 +1,51 @@
 <template>
-  <!-- <el-menu
-    router
-    default-active="route.path"
-    class="text-sm"
-    @open="handleOpen"
-    @close="handleClose">
-    <div v-for="(item, index) in getInnerMenu" :key="index"> -->
-  <!-- 单级无children -->
-  <!-- <div v-if="!item.children || item.children.length === 0">
-        <el-menu-item :index="item.path">
-          <i class="iconfont" :class="[item.meta.icon]" />
-          <template #title>{{ item.meta.title }}</template>
-        </el-menu-item>
-      </div> -->
-  <!-- 单级有children -->
-  <!-- <div v-if="item.children && item.children.length === 1">
-        <el-menu-item :index="item.children[0].path">
-          <i class="iconfont" :class="[item.children[0].meta.icon]" />
-          <template #title>{{ item.children[0].meta.title }}</template>
-        </el-menu-item>
-      </div> -->
-  <!-- 多级 -->
-  <!-- <div v-if="item.children && item.children.length > 1">
-        <el-submenu :index="item.path">
-          <template #title>
-            <i class="iconfont" :class="[item.meta.icon]" />
-            <span>{{ item.meta.title }}</span>
-          </template>
-          <el-menu-item v-for="(subItem, subIndex) in item.children" :key="subIndex" :index="subItem.path">{{ subItem.meta.title }}</el-menu-item>
-        </el-submenu>
-      </div>
-    </div>
-  </el-menu> -->
-  <div class="h-full w-48 shadow-md">
-    <div
-      class="
-        h-16
-        flex flex-col
-        items-center
-        justify-center
-        border-b border-gray-100 border-r
-      "
-    >
-      vue3 后台数据管理
-    </div>
+  <div class="aside border-r">
+    <div class="flex justify-center items-center h-18">Vue3 Element Admin</div>
     <el-scrollbar>
-      <div v-for="(item, index) in getMenu" :key="index">
-        <!-- 单级 -->
-        <div v-if="!item.children || item.children.length === 0">
-          <div
-            class="
-              pl-6
-              pr-6
-              flex
-              items-center
-              justify-start
-              h-12
-              cursor-pointer
-              transition-all
-              hover:text-blue-600
-            "
-            :class="{
-              'text-blue-500': item.path === route.path,
-              'bg-blue-100': item.path === route.path,
-            }"
-            @click="toPage(item)"
-          >
-            <i class="iconfont mr-3" :class="[item.meta.icon]" />
-            <span>{{ item.meta.title }}</span>
+      <el-menu router default-active="route.path" class="w-52 border-none">
+        <div v-for="(item, index) in layoutStore.aside.menu" :key="index">
+          <!-- 单级无children -->
+          <div v-if="!item.children || item.children.length === 0">
+            <el-menu-item
+              :index="item.path"
+              :class="{ active: item.path === layoutStore.route.currentPath }"
+            >
+              <i class="iconfont mr-3" :class="[item.meta.icon]" />
+              <template #title>{{ item.meta.title }}</template>
+            </el-menu-item>
           </div>
-        </div>
-        <!-- 多级 -->
-        <div v-if="item.children && item.children.length > 1">
-          <el-collapse>
-            <el-collapse-item>
+          <!-- 单级有children -->
+          <div v-if="item.children && item.children.length === 1">
+            <el-menu-item
+              :index="item.children[0].path"
+              :class="{
+                active: item.children[0].path === layoutStore.route.currentPath,
+              }"
+            >
+              <i class="iconfont mr-3" :class="[item.children[0].meta.icon]" />
+              <template #title>{{ item.children[0].meta.title }}</template>
+            </el-menu-item>
+          </div>
+          <!-- 多级 -->
+          <div v-if="item.children && item.children.length > 1">
+            <el-submenu :index="item.path">
               <template #title>
-                <div
-                  class="
-                    pl-6
-                    pr-6
-                    flex
-                    items-center
-                    justify-start
-                    h-12
-                    cursor-pointer
-                    transition-all
-                    hover:text-blue-600
-                  "
-                >
-                  <i class="iconfont mr-3" :class="[item.meta.icon]" />
-                  <span>{{ item.meta.title }}</span>
-                </div>
+                <i class="iconfont mr-3" :class="[item.meta.icon]" />
+                <span>{{ item.meta.title }}</span>
               </template>
-              <div
+              <el-menu-item
                 v-for="(subItem, subIndex) in item.children"
                 :key="subIndex"
-                class="
-                  pl-6
-                  pr-6
-                  flex
-                  items-center
-                  justify-start
-                  h-12
-                  cursor-pointer
-                  transition-all
-                  hover:text-blue-500
-                "
-                @click="toPage(subItem)"
+                :index="subItem.path"
+                :class="{
+                  active: subItem.path === layoutStore.route.currentPath,
+                }"
+                >{{ subItem.meta.title }}</el-menu-item
               >
-                <i class="iconfont mr-3" :class="[subItem.meta.icon]" />
-                <span>{{ subItem.meta.title }}</span>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
+            </el-submenu>
+          </div>
         </div>
-      </div>
+      </el-menu>
     </el-scrollbar>
   </div>
 </template>
@@ -129,23 +60,31 @@ const route = useRoute();
 const router = useRouter();
 const layoutStore = useLayoutStore();
 
-// 获取aside菜单
-const getMenu = computed(() => {
-  const arr = routes.filter((item) => {
-    return item.children.some((subItem) => {
-      return subItem.path === route.path;
-    });
-  });
-  return arr.length === 1 ? arr[0].children : [];
-});
-
 function toPage(item) {
-  router.push({ path: item.redirect || item.path })
+  router.push({ path: item.redirect || item.path });
 }
-
 </script>
 
 
 
-<style>
+<style lang="postcss" scoped>
+.el-menu {
+  overflow-x: hidden;
+  .el-menu-item{
+    &.active {
+      background-color: #e8f4ff;
+      color: #1890ff;
+      i {
+        color: #1890ff;
+      }
+    }
+    &:hover{
+      background-color: #e8f4ff;
+      color: #1890ff;
+      i {
+        color: #1890ff;
+      }
+    }
+  }
+}
 </style>

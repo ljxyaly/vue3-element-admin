@@ -35,16 +35,17 @@ export const routes = [
       },
       {
         path: '/comp/index3',
+        redirect: '/comp/index3/index1',
         component: EmptyLayout,
         meta: { title: '组件3', icon: 'icon-dash-board' },
         children: [
           {
-            path: '/comp/index3',
+            path: '/comp/index3/index1',
             component: () => import('@/views/comp/index3.vue'),
             meta: { title: '组件3', icon: 'icon-dash-board' }
           },
           {
-            path: '/comp/index4',
+            path: '/comp/index3/index2',
             component: () => import('@/views/comp/index4.vue'),
             meta: { title: '组件4', icon: 'icon-dash-board' }
           }
@@ -52,6 +53,7 @@ export const routes = [
       },
       {
         path: '/comp/index5',
+        component: EmptyLayout,
         meta: { title: '组件5', icon: 'icon-dash-board' },
         children: [
           {
