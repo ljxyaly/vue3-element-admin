@@ -68,23 +68,27 @@ function toPage(item) {
 
 
 <style lang="postcss" scoped>
-.el-menu {
-  overflow-x: hidden;
-  .el-menu-item{
-    &.active {
-      background-color: #e8f4ff;
-      color: #1890ff;
-      i {
+.aside {
+  background: color-mod(#1890ff alpha(50%));
+  & .el-menu {
+    overflow-x: hidden;
+    & .el-menu-item{
+      &.active {
+        background-color: #e8f4ff;
         color: #1890ff;
+        & i {
+          color: #1890ff;
+        }
       }
-    }
-    &:hover{
-      background-color: #e8f4ff;
-      color: #1890ff;
-      i {
+      &:hover{
+        background-color: #e8f4ff;
         color: #1890ff;
+        & i {
+          color: #1890ff;
+        }
       }
     }
   }
 }
+
 </style>

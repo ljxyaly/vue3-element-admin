@@ -1,7 +1,8 @@
 module.exports = {
   plugins: [
-    require('postcss-nested'),
     require('tailwindcss'),
-    require('autoprefixer')
+    require('autoprefixer'),
+    require('postcss-preset-env')({ stage: 1 }),
+    require('postcss-color-mod-function')
   ],
 }

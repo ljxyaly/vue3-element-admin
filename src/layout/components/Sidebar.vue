@@ -62,7 +62,7 @@ function toPage(item) {
 .sidebar {
   background: #111316;
   color: #fff;
-  .item.active {
+  & .item.active {
     background: #1890ff;
   }
 }
