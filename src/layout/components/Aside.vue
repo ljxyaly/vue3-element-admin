@@ -65,11 +65,9 @@ function toPage(item) {
 }
 </script>
 
-
-
 <style lang="postcss" scoped>
 .aside {
-  background: color-mod(#1890ff alpha(50%));
+  /* background: color-mod(#fff blend(#1890ff 10%)); */
   & .el-menu {
     overflow-x: hidden;
     & .el-menu-item{
